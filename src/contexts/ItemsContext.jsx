@@ -15,6 +15,7 @@ const initialState = {
 function reduce(state, action) {
   switch (action.type) {
     case "loading":
+      console.log("SETTING LOADING TO TRUE");
       return { ...state, isLoading: true };
 
     case "items/loaded":
@@ -26,6 +27,7 @@ function reduce(state, action) {
       };
 
     case "currentItem/loaded":
+      console.log("SETTING LOADING TO FALSE, ITEM LOADED");
       return {
         ...state,
         isLoading: false,
@@ -60,7 +62,7 @@ function ItemsProvider({ children }) {
 
   async function setCurrentItem(id) {
     console.log(id, currentItem);
-    if (Number(id) === currentItem.id) return;
+    if (currentItem.id && Number(id) === currentItem.id) return;
 
     dispatch({ type: "loading" });
     try {
