@@ -6,19 +6,22 @@ import ItemPage from "../pages/ItemPage";
 import CartPage from "../pages/CartPage";
 import { ItemsProvider } from "../contexts/ItemsContext";
 import ItemDetailed from "./ItemDetailed";
+import { CartProvider } from "../contexts/CartContext";
 
 function App() {
   return (
     <ItemsProvider>
-      <BrowserRouter>
-        <Routes>
-          <Route index element={<Home />} />
-          <Route path="shop" element={<Shop />} />
-          {/* <Route path="itemPage/:id" element={<ItemPage />} /> */}
-          <Route path="itemPage" element={<ItemPage />} />
-          <Route path="cart" element={<CartPage />} />
-        </Routes>
-      </BrowserRouter>
+      <CartProvider>
+        <BrowserRouter>
+          <Routes>
+            <Route index element={<Home />} />
+            <Route path="shop" element={<Shop />} />
+            {/* <Route path="itemPage/:id" element={<ItemPage />} /> */}
+            <Route path="itemPage" element={<ItemPage />} />
+            <Route path="cart" element={<CartPage />} />
+          </Routes>
+        </BrowserRouter>
+      </CartProvider>
     </ItemsProvider>
   );
 }

@@ -1,12 +1,17 @@
-import { useParams } from "react-router-dom";
+// import { useParams } from "react-router-dom";
 import { useItems } from "../contexts/ItemsContext";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import styles from "./ItemDetailed.module.css";
 import Spinner from "./Spinner";
+import { useCart } from "../contexts/CartContext";
+import { useNavigate } from "react-router-dom";
 
 function ItemDetailed() {
   // const { id } = useParams();
+  const navigate = useNavigate();
+  const [quanity, setQuantity] = useState(1);
   const { currentItem, isLoading } = useItems();
+  const { addToCart } = useCart();
 
   // useEffect(
   //   function () {
@@ -17,9 +22,11 @@ function ItemDetailed() {
   //   [id]
   // );
 
-  //   useEffect(() => {
-  //     console.log("useEffect running in ItemPage");
-  //   }, []);
+  function handleAddToCart() {
+    addToCart(currentItem, quanity, discountedPrice);
+    setQuantity(1);
+    console.log("ITEM ADDED TO CART");
+  }
 
   const {
     title,
@@ -36,13 +43,20 @@ function ItemDetailed() {
 
   if (isLoading) return <Spinner />;
 
-  const discountedPrice = (price + discountPercentage / 100).toFixed(2);
+  // if (!currentItem.length && isLoading === false) {
+  //   return <button onClick={() => navigate("/shop")}>Go To Shop -></button>;
+  // }
+
+  const discountedPrice = (price - (price * discountPercentage) / 100).toFixed(
+    2
+  );
 
   return (
     <div className={styles.item_container}>
       <div className={styles.image_container}>
         <img src={images[0]} alt={title} />
       </div>
+
       <div className={styles.item_info}>
         <h2>{title}</h2>
         <p>
@@ -56,11 +70,21 @@ function ItemDetailed() {
         </div>
         <p>{description}</p>
         <div className={styles.quanity}>
-          <span>-</span>
-          <span>1</span>
-          <span>+</span>
+          <button
+            onClick={() => setQuantity((q) => q - 1)}
+            className={styles.quantity_btn}
+          >
+            -
+          </button>
+          <span>{quanity}</span>
+          <button
+            onClick={() => setQuantity((q) => q + 1)}
+            className={styles.quantity_btn}
+          >
+            +
+          </button>
         </div>
-        <button>Add to Cart</button>
+        <button onClick={handleAddToCart}>Add to Cart</button>
       </div>
     </div>
   );
