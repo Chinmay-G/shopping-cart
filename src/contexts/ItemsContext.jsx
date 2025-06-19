@@ -34,6 +34,9 @@ function reduce(state, action) {
         currentItem: action.payload,
       };
 
+    case "error":
+      return { ...state, error: action.payload };
+
     default:
       throw new Error("Incorrect action type");
   }
@@ -75,6 +78,18 @@ function ItemsProvider({ children }) {
     }
   }
 
+  async function getCategoryItems(category) {
+    // dispatch({ type: "loading" });
+    try {
+      const res = await fetch(`${BASE_URL}/category/${category}?limit=10`);
+      const data = await res.json();
+      console.log("CATEGORY PRODUCTS: ", data.products);
+      return data.products;
+    } catch {
+      dispatch({ type: "error", payload: "Error loading items" });
+    }
+  }
+
   return (
     <ItemsContext.Provider
       value={{
@@ -82,7 +97,7 @@ function ItemsProvider({ children }) {
         isLoading,
         currentItem,
         setCurrentItem,
-        dispatch,
+        getCategoryItems,
       }}
     >
       {children}

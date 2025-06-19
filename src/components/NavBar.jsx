@@ -8,6 +8,7 @@ function NavBar() {
   return (
     <nav>
       <ul className={styles.nav_list}>
+        <li onClick={() => navigate("/")}>Logo</li>
         <li onClick={() => navigate("/shop")}>Shop</li>
         <li onClick={() => navigate("/itemPage")}>Item Page</li>
         <li onClick={() => navigate("/cart")}>Cart</li>

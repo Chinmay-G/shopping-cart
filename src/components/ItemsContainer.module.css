@@ -4,36 +4,3 @@
   gap: 3rem;
   justify-content: center;
 }
-
-.item_card {
-  width: 18rem;
-  min-height: 20rem;
-  overflow: hidden;
-  background-color: white;
-  background-image: linear-gradient(white, gray);
-  /* border: 1px solid black; */
-  /* border-radius: 2rem; */
-  border-radius: 0.5rem;
-  /* box-shadow: 3px 3px 10px 2px gray; */
-  box-shadow: 3px 3px 10px gray;
-  text-align: center;
-  transition: all 0.5s;
-}
-
-/* .item_card:hover img, */
-.item_card:hover {
-  cursor: pointer;
-  background-color: white;
-  /* box-shadow: 7px 7px 6px 2px gray; */
-  /* box-shadow: none; */
-}
-
-.item_card:hover img {
-  scale: 1.2;
-}
-
-.item_image {
-  /* background-color: whitesmoke; */
-  text-shadow: 2px 2px 2px black;
-  transition: scale 0.4s;
-}
