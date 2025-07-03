@@ -43,9 +43,10 @@ function ItemDetailed() {
 
   if (isLoading) return <Spinner />;
 
-  // if (!currentItem.length && isLoading === false) {
-  //   return <button onClick={() => navigate("/shop")}>Go To Shop -></button>;
-  // }
+  // When /itemPage is accessed when no currentItem is set
+  if (!images && isLoading === false) {
+    return <button onClick={() => navigate("/shop")}>Go To Shop -></button>;
+  }
 
   const discountedPrice = (price - (price * discountPercentage) / 100).toFixed(
     2

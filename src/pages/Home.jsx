@@ -10,11 +10,11 @@ function Home() {
       <NavBar />
       HOME
       <button onClick={() => navigate("shop")}>Shop Now</button>
-      <ItemsRow category="mens-watches" />
-      <ItemsRow category="groceries" />
+      {/* <ItemsRow category="mens-watches" /> */}
+      <ItemsRow category="groceries" reverse="false" />
       <ItemsRow category="smartphones" />
-      <ItemsRow category="sunglasses" />
-      <ItemsRow category="mens-shirts" />
+      {/* <ItemsRow category="sunglasses" /> */}
+      {/* <ItemsRow category="mens-shirts" /> */}
     </div>
   );
 }
